@@ -1,7 +1,7 @@
 const models = require("../models/models.js");
 
 exports.getQuestions = (req, res) => {
-  models.findAllQuestions((err, questions) => {
+  models.findAllQuestions(req.query, (err, questions) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -11,7 +11,7 @@ exports.getQuestions = (req, res) => {
 };
 
 exports.getAnswers = (req, res) => {
-  models.findAllAnswers(req.params.question_id, (err, answers) => {
+  models.findAllAnswers(req.query, req.params.question_id, (err, answers) => {
     if (err) {
       res.sendStatus(500);
     } else {
