@@ -12,6 +12,9 @@ app.use(express.json());
 // TODO: Define routes
 app.get('/qa/questions', controllers.getQuestions);
 app.get('/qa/questions/:question_id/answers', controllers.getAnswers);
+app.get('/loaderio-5ebfde7c706c60ed38823972ca3b1c1a', (req, res) => {
+  res.send('loaderio-5ebfde7c706c60ed38823972ca3b1c1a');
+});
 app.post('/qa/questions', controllers.postQuestion);
 app.post('/qa/questions/:question_id/answers', controllers.postAnswer);
 app.put('/qa/questions/:question_id/helpful', controllers.markHelpfulQuestion);
