@@ -11,7 +11,7 @@ exports.findAllQuestions = (inputs, callback) => {
   const query = `SELECT
   product_id,
   (
-    SELECT json_agg(
+    SELECT coalesce(json_agg(
       json_build_object(
         'question_id', questions.id,
         'question_body', questions.body,
@@ -33,10 +33,9 @@ exports.findAllQuestions = (inputs, callback) => {
                   'helpfulness', answers.helpful,
 
                   'photos', (
-                    SELECT coalesce(json_agg(row_to_json(photo)), '[]'::json)
-                    FROM (SELECT id, url FROM photos
-                    WHERE photos.answer_id = answers.id)
-                    AS photo
+                    SELECT coalesce(json_agg(url), '[]'::json)
+                    FROM photos
+                    WHERE photos.answer_id = answers.id
                   )
                 )
               )
@@ -49,7 +48,7 @@ exports.findAllQuestions = (inputs, callback) => {
         )
       )
       ORDER BY id ASC
-    )
+    ))
   ) AS results
   FROM questions
   WHERE questions.product_id = ${inputs.product_id} AND questions.reported = 'false'
