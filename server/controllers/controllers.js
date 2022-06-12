@@ -15,7 +15,6 @@ exports.getAnswers = (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log(answers);
       res.status(200).send(answers);
     }
   });
@@ -76,7 +75,6 @@ exports.markHelpfulAnswer = (req, res) => {
 exports.reportAnswer = (req, res) => {
   models.reportAnswerToggle(req.params.answer_id, (err, success) => {
     if (err) {
-      console.log(err)
       res.sendStatus(500);
     } else {
       res.sendStatus(204);
