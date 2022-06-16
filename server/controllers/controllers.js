@@ -3,7 +3,6 @@ const models = require("../models/models.js");
 exports.getQuestions = (req, res) => {
   models.findAllQuestions(req.query, (err, questions) => {
     if (err) {
-      console.log(err)
       res.sendStatus(500);
     } else {
       res.status(200).send(questions);
@@ -54,7 +53,6 @@ exports.markHelpfulQuestion = (req, res) => {
 exports.reportQuestion = (req, res) => {
   models.reportQuestionToggle(req.params.question_id, (err, success) => {
     if (err) {
-      console.log(err)
       res.sendStatus(500);
     } else {
       res.sendStatus(204);
@@ -65,7 +63,6 @@ exports.reportQuestion = (req, res) => {
 exports.markHelpfulAnswer = (req, res) => {
   models.markAnswerHelpful(req.params.answer_id, (err, success) => {
     if (err) {
-      console.log(err)
       res.sendStatus(500);
     } else {
       res.sendStatus(204);
