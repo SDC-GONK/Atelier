@@ -3,6 +3,7 @@ const models = require("../models/models.js");
 exports.getQuestions = (req, res) => {
   models.findAllQuestions(req.query, (err, questions) => {
     if (err) {
+      console.log(err)
       res.sendStatus(500);
     } else {
       res.status(200).send(questions);
